@@ -48,7 +48,7 @@ const covid19ImpactEstimator = (data) => {
     let hospitalBedsAvailableThen = 0;
     let hospitalBedsAvailable = 0;
 
-    hospitalBedsAvailable = Math.round(0.35 * totalHospitalBedsAvailable) - 1;
+    hospitalBedsAvailable = Math.round(0.35 * totalHospitalBedsAvailable);
 
     // After severe case consideration
     hospitalBedsAvailableThen = hospitalBedsAvailable - severeCases;
@@ -108,7 +108,7 @@ const covid19ImpactEstimator = (data) => {
 
   impact.casesForICUByRequestedTime = severePositiveCasesForICU(impact.infectionsByRequestedTime);
 
-  impact.casesForVentilationByRequestedTime = severePositiveCasesForVentilation(
+  impact.casesForVentilatorsByRequestedTime = severePositiveCasesForVentilation(
     impact.infectionsByRequestedTime
   );
 
@@ -131,7 +131,7 @@ const covid19ImpactEstimator = (data) => {
     severeImpact.infectionsByRequestedTime
   );
 
-  severeImpact.casesForVentilationByRequestedTime = severePositiveCasesForVentilation(
+  severeImpact.casesForVentilatorsByRequestedTime = severePositiveCasesForVentilation(
     severeImpact.infectionsByRequestedTime
   );
 
