@@ -48,7 +48,7 @@ const covid19ImpactEstimator = (data) => {
     let hospitalBedsAvailableThen = 0;
     let hospitalBedsAvailable = 0;
 
-    hospitalBedsAvailable = Math.round(0.35 * totalHospitalBedsAvailable)-1;
+    hospitalBedsAvailable = Math.round(0.35 * totalHospitalBedsAvailable) - 1;
 
     // After severe case consideration
     hospitalBedsAvailableThen = hospitalBedsAvailable - severeCases;
