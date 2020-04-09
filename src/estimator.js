@@ -39,7 +39,7 @@ const covid19ImpactEstimator = (data) => {
 
   // Function computes severeCases
   function computeSevereCases(infected) {
-    return 0.15 * infected;
+    return parseInt(0.15 * infected, 10);
   }
 
   // Function computes number of avaialble beds for the severe cases
@@ -48,7 +48,7 @@ const covid19ImpactEstimator = (data) => {
     let hospitalBedsAvailableThen = 0;
     let hospitalBedsAvailable = 0;
 
-    hospitalBedsAvailable = 0.35 * totalHospitalBedsAvailable;
+    hospitalBedsAvailable = parseInt(0.35 * totalHospitalBedsAvailable, 10);
 
     // After severe case consideration
     hospitalBedsAvailableThen = hospitalBedsAvailable - severeCases;
@@ -57,12 +57,12 @@ const covid19ImpactEstimator = (data) => {
 
   // Function that  computes severe Positive Cases in need for ICU
   function severePositiveCasesForICU(severe) {
-    return 0.05 * severe;
+    return parseInt(0.05 * severe, 10);
   }
 
   // Function that computes severe positive cases in need for ventilation
   function severePositiveCasesForVentilation(severe) {
-    return 0.02 * severe;
+    return parseInt(0.02 * severe, 10);
   }
 
   // Function computes total amount in a certain period of time(days)
