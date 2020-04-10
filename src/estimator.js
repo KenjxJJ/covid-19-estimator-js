@@ -91,7 +91,7 @@ const covid19ImpactEstimator = (data) => {
         break;
       default:
     }
-     
+
 
     dollarsInFlight = (infected * majority * avgLossFactor);
 
