@@ -1,4 +1,3 @@
-
 const covid19ImpactEstimator = (data) => {
   const input = data;
   const impact = {};
@@ -6,7 +5,7 @@ const covid19ImpactEstimator = (data) => {
 
   const {
     reportedCases, timeToElapse, totalHospitalBeds,
-    avgIncomeInUSD, avgDailyIncomePopulation, periodType
+    region, periodType
   } = data;
 
   // Function computes infectionRate
@@ -48,7 +47,7 @@ const covid19ImpactEstimator = (data) => {
     let hospitalBedsAvailableThen = 0;
     let hospitalBedsAvailable = 0;
 
-    hospitalBedsAvailable = Math.trunc(0.35 * totalHospitalBedsAvailable);
+    hospitalBedsAvailable = Math.ceil(0.35 * totalHospitalBedsAvailable);
 
     // After severe case consideration
     hospitalBedsAvailableThen = hospitalBedsAvailable - severeCases;
@@ -71,19 +70,19 @@ const covid19ImpactEstimator = (data) => {
     let numberOfDays = 0;
     switch (periodTypeDays) {
       case 'days':
-        dollarsInFlight = parseFloat((majority * infected * avgIncome) / timeFactor).toFixed(2);
+        dollarsInFlight = parseFloat((majority * infected * avgIncome) * timeFactor).toFixed(2);
         break;
       case 'weeks':
         numberOfDays = 7 * timeFactor;
-        dollarsInFlight = parseFloat((majority * infected * avgIncome) / numberOfDays).toFixed(2);
+        dollarsInFlight = parseFloat((majority * infected * avgIncome) * numberOfDays).toFixed(2);
         break;
       case 'months':
         numberOfDays = 30 * timeFactor;
-        dollarsInFlight = parseFloat((majority * infected * avgIncome) / numberOfDays).toFixed(2);
+        dollarsInFlight = parseFloat((majority * infected * avgIncome) * numberOfDays).toFixed(2);
         break;
       default:
     }
-    return dollarsInFlight;
+    return +dollarsInFlight;
   }
 
   // For impact
@@ -101,8 +100,8 @@ const covid19ImpactEstimator = (data) => {
     impact.infectionsByRequestedTime
   );
 
-  impact.dollarsInFlight = computeEconomicLoss(avgDailyIncomePopulation,
-    impact.infectionsByRequestedTime, avgIncomeInUSD, timeToElapse, periodType);
+  impact.dollarsInFlight = computeEconomicLoss(region.avgDailyIncomePopulation,
+    impact.infectionsByRequestedTime, region.avgDailyIncomeInUSD, timeToElapse, periodType);
 
   // For severeImpact
   severeImpact.currentlyInfected = reportedCases * 50;
@@ -124,9 +123,8 @@ const covid19ImpactEstimator = (data) => {
     severeImpact.infectionsByRequestedTime
   );
 
-  severeImpact.dollarsInFlight = computeEconomicLoss(avgDailyIncomePopulation,
-    severeImpact.infectionsByRequestedTime, avgIncomeInUSD, timeToElapse, periodType);
-
+  severeImpact.dollarsInFlight = computeEconomicLoss(region.avgDailyIncomePopulation,
+    severeImpact.infectionsByRequestedTime, region.avgDailyIncomeInUSD, timeToElapse, periodType);
   return {
     data: input,
     impact,
