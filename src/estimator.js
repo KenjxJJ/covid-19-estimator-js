@@ -68,7 +68,7 @@ const covid19ImpactEstimator = (data) => {
   // Function computes total amount in a certain period of time(days)
   // from a time frame in days, weeks, months
   function computeEconomicLossFactor(timeFactor, avgIncome) {
-    return avgIncome * timeFactor;
+    return (avgIncome * timeFactor);
   }
 
   // Function that computes the money lost in a certain period
@@ -92,7 +92,7 @@ const covid19ImpactEstimator = (data) => {
       default:
     }
 
-    dollarsInFlight = infected * majority * avgLossFactor;
+    dollarsInFlight = (infected * majority * avgLossFactor);
 
     return dollarsInFlight;
   }
