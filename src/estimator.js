@@ -39,7 +39,7 @@ const covid19ImpactEstimator = (data) => {
 
   // Function computes severeCases
   function computeSevereCases(infected) {
-    return Math.round(0.15 * infected);
+    return Math.trunc(0.15 * infected);
   }
 
   // Function computes number of avaialble beds for the severe cases
@@ -48,7 +48,7 @@ const covid19ImpactEstimator = (data) => {
     let hospitalBedsAvailableThen = 0;
     let hospitalBedsAvailable = 0;
 
-    hospitalBedsAvailable = Math.round(0.35 * totalHospitalBedsAvailable);
+    hospitalBedsAvailable = Math.trunc(0.35 * totalHospitalBedsAvailable);
 
     // After severe case consideration
     hospitalBedsAvailableThen = hospitalBedsAvailable - severeCases;
@@ -57,44 +57,32 @@ const covid19ImpactEstimator = (data) => {
 
   // Function that  computes severe Positive Cases in need for ICU
   function severePositiveCasesForICU(severe) {
-    return Math.round(0.05 * severe);
+    return Math.trunc(0.05 * severe);
   }
 
   // Function that computes severe positive cases in need for ventilation
   function severePositiveCasesForVentilation(severe) {
-    return Math.round(0.02 * severe);
-  }
-
-  // Function computes total amount in a certain period of time(days)
-  // from a time frame in days, weeks, months
-  function computeEconomicLossFactor(timeFactor, avgIncome) {
-    return (avgIncome * timeFactor);
+    return Math.trunc(0.02 * severe);
   }
 
   // Function that computes the money lost in a certain period
-  function computeEconomicLoss(majority = 0.65, infected, avgIncome, timeFactor, periodTypeDays) {
+  function computeEconomicLoss(majority, infected, avgIncome, timeFactor, periodTypeDays) {
     let dollarsInFlight = 0;
-    let avgLossFactor = 0;
     let numberOfDays = 0;
-
     switch (periodTypeDays) {
       case 'days':
-        avgLossFactor = computeEconomicLossFactor(timeFactor, avgIncome);
+        dollarsInFlight = parseFloat((majority * infected * avgIncome) / timeFactor).toFixed(2);
         break;
       case 'weeks':
         numberOfDays = 7 * timeFactor;
-        avgLossFactor = computeEconomicLossFactor(numberOfDays, avgIncome);
+        dollarsInFlight = parseFloat((majority * infected * avgIncome) / numberOfDays).toFixed(2);
         break;
       case 'months':
         numberOfDays = 30 * timeFactor;
-        avgLossFactor = computeEconomicLossFactor(numberOfDays, avgIncome);
+        dollarsInFlight = parseFloat((majority * infected * avgIncome) / numberOfDays).toFixed(2);
         break;
       default:
     }
-
-
-    dollarsInFlight = (infected * majority * avgLossFactor);
-
     return dollarsInFlight;
   }
 
