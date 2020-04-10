@@ -70,19 +70,19 @@ const covid19ImpactEstimator = (data) => {
     let numberOfDays = 0;
     switch (periodTypeDays) {
       case 'days':
-        dollarsInFlight = parseFloat((majority * infected * avgIncome) / timeFactor).toFixed(2);
+        dollarsInFlight = Math.round((majority * infected * avgIncome) / timeFactor);
         break;
       case 'weeks':
         numberOfDays = 7 * timeFactor;
-        dollarsInFlight = parseFloat((majority * infected * avgIncome) / numberOfDays).toFixed(2);
+        dollarsInFlight = Math.round((majority * infected * avgIncome) / numberOfDays);
         break;
       case 'months':
         numberOfDays = 30 * timeFactor;
-        dollarsInFlight = parseFloat((majority * infected * avgIncome) / numberOfDays).toFixed(2);
+        dollarsInFlight = Math.round((majority * infected * avgIncome) / numberOfDays);
         break;
       default:
     }
-    return +dollarsInFlight;
+    return dollarsInFlight;
   }
 
   // For impact
