@@ -1,0 +1,55 @@
+body {
+    font-family: "Comic Sans","Arial Narrow" ,Verdana, Arial, sans-serif;
+    font-weight: 400;
+    margin: 2em;
+    color: rgba(0, 2, 2, 0.842);
+    
+}
+
+h2  {
+    text-align: center;
+    color: white;
+border-radius: 5px;
+box-shadow: 5px 5px 4px 0 rgba(9,130,154,0.2);
+background: linear-gradient(rgba(9, 130, 154, 1), rgba(9, 130, 154, 0.5));
+}
+h1 {
+    font-size: 2.5rem;;
+   text-align: center;
+   color: rgba(0, 2, 2, 0.911);
+}
+
+
+legend{
+    font-weight: 800;
+    font-size: x-large;
+}
+fieldset {
+  border-width:1px;
+  width: 60%;
+  margin: auto;
+}
+label{
+   font-weight: 500;
+   display:inline-block;
+   padding: 0.5em 0.1em;
+
+}
+
+input {
+    display: block; 
+    max-width: 100%;
+    border:0;
+    border-bottom: 2px solid rgba(63, 63, 255, 0.911);
+    padding: 0.5em;
+}
+.btn{
+    width: 40%;
+    height: 35px;
+    color: rgb(243, 241, 239);
+    background-color: rgb(117, 108, 108);
+    border-radius: 5px;
+    font-size: 1.05em;
+    margin-top: 5px;
+    padding: 0.3em;
+}
