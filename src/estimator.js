@@ -132,24 +132,4 @@ const covid19ImpactEstimator = (data) => {
   };
 };
 
-const isValidElement = (element) => element.name && element.value;
-const form = document.getElementsByClassName('usrForm')[0];
-const btn = document.querySelector('.btn');
-
-const formToJSON = (elements) => [].reduce.call(elements, (data, element) => {
-  // To make sure the element has required properties.
-  if (isValidElement(element)) {
-    data[element.name] = element.value;
-  }
-  return data;
-}, {});
-
-
-const handleFormSubmit = (event) => {
-  event.preventDefault();
-  JSON.stringify(formToJSON(form.elements), null, ' ');
-};
-btn.addEventListener('submit', handleFormSubmit);
-
-
 export default covid19ImpactEstimator;
